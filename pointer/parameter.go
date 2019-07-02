@@ -7,10 +7,12 @@ func main() {
 		name: "martin",
 		age:  10,
 	}
-	birthday(&p)
+
+	// ポインタを使用していないが自動的に変数のアドレス(&)だと判定する
+	p.birthday()
 	fmt.Println(p)
 
-	p.birthday()
+	birthday(&p)
 	fmt.Println(p)
 }
 
@@ -25,6 +27,9 @@ func birthday(p *person) {
 	p.age++
 }
 
-func (p *person) birthday() {
+// ポインタレシーバ
+// 呼び出し元のpersonのフィールドを直接書き換えることができる
+// ポインタレシーバでなければageがインクリメントされない
+func (p person) birthday() {
 	p.age++
 }
